@@ -1,0 +1,4 @@
+Modelo inicial, treinando sem aumento
+* Accuracy on training set: 98.59%
+* Accuracy on test set: 53.10%
+
