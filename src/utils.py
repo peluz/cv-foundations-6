@@ -40,21 +40,6 @@ def build_people_dictionary(model):
         pickle.dump(people, file)
 
 
-def write_tsv(in_file, out_file, dictionary):
-    with open(in_file, 'r') as file:
-        next(file)
-        with open(out_file, 'w') as out:
-            for line in file:
-                person, _ = line.split("\t")
-                print("Writing {}".format(person))
-                for img in dictionary[person]:
-                    for index, dim in enumerate(img[0]):
-                        out.write("d{}:{}".format(index + 1, dim))
-                        out.write(" ")
-                    out.write("\t")
-                out.write("\n")
-
-
 def load_data(filename, dictionary):
     X = []
     y = []
