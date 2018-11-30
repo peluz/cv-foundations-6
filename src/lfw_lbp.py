@@ -6,6 +6,7 @@ import cv2 as cv
 import os
 import sys
 import matplotlib.pyplot as plt
+import random
 from local_binary_patterns import LocalBinaryPatterns
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -19,19 +20,18 @@ HEIGHT = 160
 WIDTH = 160
 
 def main():
-    pairs = read_pairs(os.path.expanduser("data/pairsDevTrain.txt"))
-    train_set, _ = get_paths(os.path.expanduser("data/images"), pairs)
+    train_set = sorted(list(paths.list_images("data/images")))
+    random.shuffle(train_set)
+    # pairs = read_pairs(os.path.expanduser("data/pairsDevTrain.txt"))
+    # train_set, _ = get_paths(os.path.expanduser("data/images"), pairs)
     X_train, Y_train = get_dataset(train_set)
-    print(Y_train)
-    sys.exit()
     print("treino foi")
     pairs = read_pairs(os.path.expanduser("data/pairsDevTest.txt"))
     validation_set, _ = get_paths(os.path.expanduser("data/images"), pairs)
     X_val, Y_val = get_dataset(validation_set)
     print("val tmb")
 
-    # model = LinearSVC(C=100.0, random_state=42)
-    model = KNeighborsClassifier(n_jobs = -1)
+    model = LinearSVC(C=100.0, random_state=42)
     model.fit(X_train, Y_train)
     pred = model.predict(X_val)
     print(accuracy_score(Y_val, pred))
