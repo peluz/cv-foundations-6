@@ -16,16 +16,16 @@ from sklearn.svm import SVC, LinearSVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 
-HEIGHT = 160
-WIDTH = 160
-
 def main():
     train_set = sorted(list(paths.list_images("data/images")))
     random.shuffle(train_set)
-    # pairs = read_pairs(os.path.expanduser("data/pairsDevTrain.txt"))
-    # train_set, _ = get_paths(os.path.expanduser("data/images"), pairs)
-    X_train, Y_train = get_dataset(train_set)
+    _, Y_train = get_dataset(train_set)
+
+    pairs = read_pairs(os.path.expanduser("data/pairsDevTrain.txt"))
+    train_set, _ = get_paths(os.path.expanduser("data/images"), pairs)
+    X_train, _ = get_dataset(train_set)
     print("treino foi")
+
     pairs = read_pairs(os.path.expanduser("data/pairsDevTest.txt"))
     validation_set, _ = get_paths(os.path.expanduser("data/images"), pairs)
     X_val, Y_val = get_dataset(validation_set)
