@@ -17,13 +17,13 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 
 def main():
-    train_set = sorted(list(paths.list_images("data/images")))
-    random.shuffle(train_set)
-    _, Y_train = get_dataset(train_set)
+    # train_set = sorted(list(paths.list_images("data/images")))
+    # random.shuffle(train_set)
+    # _, Y_train = get_dataset(train_set)
 
     pairs = read_pairs(os.path.expanduser("data/pairsDevTrain.txt"))
     train_set, _ = get_paths(os.path.expanduser("data/images"), pairs)
-    X_train, _ = get_dataset(train_set)
+    X_train, Y_train = get_dataset(train_set)
     print("treino foi")
 
     pairs = read_pairs(os.path.expanduser("data/pairsDevTest.txt"))

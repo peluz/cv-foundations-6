@@ -17,22 +17,18 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 import random
 
-HEIGHT = 112
-WIDTH = 112
-
 def main():
     image_path = sorted(list(paths.list_images("data/images")))
     random.shuffle(image_path)
     data, labels = get_dataset(image_path)
-    (X_train, X_test, Y_train, Y_test) = train_test_split(data, labels, test_size=0.25)
+    (X_train, X_test, Y_train, Y_test) = train_test_split(data, labels, test_size=0.3)
     
-
-    model = SVC(gamma='auto')
-    # model = MLPClassifier(hidden_layer_sizes=(X_train.shape[0],), solver='lbfgs',
-                    # activation='tanh',learning_rate_init=0.01)
+    # model = SVC(gamma='auto')
+    # model = LinearSVC(C=100.0, random_state=42)
+    model = MLPClassifier(max_iter=500)
+    # model = KNeighborsClassifier(n_jobs=-1)
     model.fit(X_train, Y_train)
     pred = model.predict(X_test)
-    # prediction = model.predict(hist.reshape(1, -1))
     print(accuracy_score(Y_test, pred))
 
 def get_dataset(image_path):
@@ -48,7 +44,7 @@ def get_dataset(image_path):
         labels.append(label)
 
     dataset = np.array(dataset, dtype="float")
-    dataset = normalize(dataset)
+    # dataset = normalize(dataset)
     labels = np.array(labels)
     return dataset, labels
 
