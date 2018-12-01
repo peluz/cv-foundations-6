@@ -30,3 +30,21 @@
 	python src/train.py
 	```
 - Requisito 2:
+	- rodar no diretório raiz do projeto, para extrair as embeddings:
+	```bash
+	python3 extract_embeddings.py --dataset turma --embeddings output/embeddings_turma.pickle --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7
+	```
+	A entrada é o diretório contendo as imagens, o detector de faces e o modelo de extração das embeddings.
+	A saída é um serialized db das embeddings faciais, para ser usado como treino.
+	- em seguida rodar, para treinar o modelo:
+	```bash
+	python3 train_model.py --embeddings output/embeddings_turma.pickle --recognizer output/recognizer_turma.pickle --le output/le_turma.pickle
+	```
+	A entrada é o output do passo anterior e a saída é o modelo de reconhecimento treinado e o label encoder.
+	- Por fim, use um dos seguintes comandos para fazer reconhecimento de uma imagem não vista anteriormente. O primeiro comando detecta e reconhece um novo rosto em uma imagem dada como input e o segundo detecta e reconhece no vídeo capturado pela webcam.
+	```bash
+	python3 recognize.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer_turma.pickle --le output/le_turma.pickle --image images/Raphael.jpg
+	```
+	```bash
+	python3 recognize_video.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer_turma.pickle --le output/le_turma.pickle
+	``` 
