@@ -48,3 +48,4 @@
 	```bash
 	python3 recognize_video.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer_turma.pickle --le output/le_turma.pickle
 	``` 
+	- Acesse o seguinte link para baixar o dataset lfw http://vis-www.cs.umass.edu/lfw/lfw.tgz utilizado no pipeline de detecção e reconhecimento construído neste requisito. 
